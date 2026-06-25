@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Donor Dashboard</title>
+
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- GLASS HEADER with orange nuance -->
+    <div class="dashboard-header">
+      <i class="fas fa-hand-holding-heart" style="color: #ff4a17"></i>
+      Charity<span style="font-weight: 300; color: #ff4a17">·</span>System
+    </div>
+
+    <div class="dashboard-container">
+      <!-- SIDEBAR — fully professional, icons + active state -->
+      <div class="sidebar">
+        <h4>DONOR PANEL</h4>
+        <ul>
+          <li>
+            <a href="#" onclick="showSection('dashboard')" class="active">
+              <i class="fas fa-chart-pie"></i> Dashboard
+            </a>
+          </li>
+
+          <li>
+            <a href="#" onclick="showSection('profile')">
+              <i class="fas fa-user-circle"></i> My Profile
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('ngo')">
+              <i class="fas fa-donate"></i> NGO List
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'donation' %}">
+              <i class="fas fa-donate"></i> Donate
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'show_donation' %}"> <i></i> Donation History </a>
+          </li>
+      
+          <li style="margin-top: 30px">
+            <a href="{% url 'logout' %}"
+              ><i class="fas fa-sign-out-alt"></i> Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content dashboard-bg">
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard-section" class="content-section active-section">
+          <div class="dashboard-hero-content">
+            <h2 style="font-weight: 600; font-size: 28px; color: #ffffff">
+              Welcome back,
+              <span style="color: #ff4a17">{{ fname }}</span>
+            </h2>
+
+            <p style="margin-top: 10px; color: #ffffff; opacity: 0.85">
+              Track your contributions, monitor impact, and manage your
+              donations effortlessly.
+            </p>
+          </div>
+        </div>
+
+        <!-- PROFILE SECTION -->
+        <div id="profile-section" class="content-section">
+          <div class="profile-wrapper">
+            <div class="profile-card">
+              <div class="profile-accent"></div>
+
+              <div class="profile-image">
+                <img src="/static/img/default-user.png" alt="Profile" />
+              </div>
+
+              <h3 class="profile-name">
+                {{ request.user.first_name }} {{ request.user.last_name }}
+              </h3>
+
+              <div class="profile-info">
+                <div class="info-row">
+                  <span>Email</span>
+                  <strong>{{ request.user.username }}</strong>
+                </div>
+
+                <div class="info-row">
+                  <span>Date Joined</span>
+                  <strong>{{ request.user.date_joined|date:"M d, Y" }}</strong>
+                </div>
+
+                <div class="info-row">
+                  <span>Last Login</span>
+                  <strong
+                    >{{ request.user.last_login|date:"M d, Y - H:i" }}</strong
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NGO LIST SECTION -->
+        <div id="ngo-section" class="content-section">
+          <div class="section-header">
+            <h3 class="section-title">Registered NGOs</h3>
+            <p class="section-subtitle">
+              Explore verified organizations and support meaningful causes.
+            </p>
+          </div>
+
+          <div class="ngo-grid">
+            {% for trust in trusts %}
+            <div class="ngo-card">
+              <!-- Accent Strip -->
+              <div class="ngo-accent"></div>
+
+              <div class="ngo-card-header">
+                <h5 class="ngo-name">
+                  {{ trust.user.first_name }} {{ trust.user.last_name }}
+                </h5>
+              </div>
+
+              <div class="ngo-card-body">
+                <div class="ngo-row">
+                  <span>Contact</span>
+                  <strong>{{ trust.contact_number }}</strong>
+                </div>
+
+                <div class="ngo-row">
+                  <span>Address</span>
+                  <strong>{{ trust.address }}</strong>
+                </div>
+
+                <div class="ngo-row">
+                  <span>Email</span>
+                  <strong>{{ trust.user.username }}</strong>
+                </div>
+
+                <div class="ngo-row">
+                  <span>ETH Address</span>
+                  <strong class="eth-address"> {{ trust.eth_address }} </strong>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="no-ngo">No NGOs available.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- END main-content -->
+    </div>
+    <!-- END dashboard-container -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+  </body>
+</html>

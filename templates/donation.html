@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Donate | Charity System</title>
+
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    Charity<span style="font-weight: 300; color: #ff4a17">·</span>System
+  </div>
+
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <h4>DONOR PANEL</h4>
+      <ul>
+        <!-- Go Back to Dashboard -->
+        <li>
+          <a href="{% url 'user_dashboard' %}"> <i></i> Dashboard </a>
+        </li>
+
+        <!-- You cannot use showSection here -->
+        <li>
+          <a href="{% url 'user_dashboard' %}"> <i></i> My Profile </a>
+        </li>
+
+        <li>
+          <a href="{% url 'user_dashboard' %}"> <i></i> NGO List </a>
+        </li>
+
+        <!-- Current Page -->
+        <li>
+          <a href="{% url 'donation' %}" class="active"> <i></i> Donate </a>
+        </li>
+
+        <li>
+          <a href="{% url 'show_donation' %}"> <i></i> Donation History </a>
+        </li>
+
+        <li style="margin-top: 30px">
+          <a href="{% url 'logout' %}"> <i></i> Logout </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="section-header">
+        <h3 class="section-title">Select a Trust to Donate</h3>
+        <p class="section-subtitle">
+          Send ETH securely via MetaMask and record it on blockchain.
+        </p>
+      </div>
+
+      <div class="ngo-grid">
+        {% for trust in trusts %}
+        <div class="ngo-card">
+          <div class="ngo-accent"></div>
+
+          <h5 class="ngo-name">
+            <i class="fas fa-landmark me-2 text-danger"></i>
+            {{ trust.user.first_name }}
+          </h5>
+
+          <div class="ngo-row">
+            <span>ETH Address</span>
+            <strong class="eth-address"> {{ trust.eth_address }} </strong>
+          </div>
+
+          <div class="ngo-row">
+            <span>Contact</span>
+            <strong>{{ trust.contact_number }}</strong>
+          </div>
+
+          <button class="donate-btn w-100 mt-3" data-bs-toggle="modal" data-bs-target="#donateModal"
+            data-trust-id="{{ trust.id }}" data-trust-name="{{ trust.user.first_name }}"
+            data-trust-eth-address="{{ trust.eth_address }}">
+            <i class="fas fa-donate me-1"></i> Donate Now
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- DONATION MODAL -->
+  <div class="modal fade" id="donateModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background: #ff4a17; color: white">
+          <h5 class="modal-title">
+            <i class="fas fa-donate me-2"></i> Confirm Donation
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="donationForm">
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="hidden" id="trustIdInput" />
+            <input type="hidden" id="trustEthAddressInput" />
+
+            <div class="mb-3">
+              <label class="form-label">Organization</label>
+              <input type="text" id="orgNameInput" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">ETH Address</label>
+              <input type="text" id="displayEthAddress" class="form-control eth-address" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Amount (₹ INR)</label>
+              <input type="number" id="amountInrInput" class="form-control" min="1" required />
+            </div>
+
+            <div class="alert alert-warning">
+              Make sure MetaMask is connected to Ganache (Chain ID 1337).
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" id="confirmDonationBtn" class="donate-btn" onclick="processDonation()">
+              Confirm Donation
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Add this BEFORE your closing </body> tag -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const donateModal = document.getElementById("donateModal");
+      donateModal.addEventListener("show.bs.modal", function (event) {
+        const button = event.relatedTarget;
+
+        // ✅ Clear the form first
+        document.getElementById("amountInrInput").value = "";
+
+        document.getElementById("trustIdInput").value =
+          button.getAttribute("data-trust-id");
+        document.getElementById("orgNameInput").value =
+          button.getAttribute("data-trust-name");
+
+        const eth = button.getAttribute("data-trust-eth-address");
+        document.getElementById("trustEthAddressInput").value = eth;
+        document.getElementById("displayEthAddress").value = eth;
+      });
+    });
+
+    async function processDonation() {
+      try {
+        if (typeof window.ethereum === 'undefined') {
+          alert('❌ MetaMask not installed!');
+          return;
+        }
+
+        // ✅ Use web3.js
+        const web3 = new Web3(window.ethereum);
+
+        // Connect wallet
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const userWallet = accounts[0];
+
+        const trustId = document.getElementById("trustIdInput").value.trim();
+        const trustEthAddress = document.getElementById("trustEthAddressInput").value.trim();
+        const inrAmount = parseFloat(document.getElementById("amountInrInput").value);
+
+        // ✅ Better validation
+        if (!trustId || !trustEthAddress || isNaN(inrAmount) || inrAmount <= 0) {
+          alert('❌ All fields required & Amount must be > 0');
+          return;
+        }
+
+        const btn = document.getElementById("confirmDonationBtn");
+        btn.disabled = true;
+        btn.innerText = "Processing...";
+
+        const ETH_TO_INR = 300000;
+        const totalEth = (inrAmount / ETH_TO_INR).toFixed(6);
+
+        console.log("Sending transaction:", { userWallet, trustEthAddress, totalEth });
+
+        // ✅ Send transaction
+        const tx = await web3.eth.sendTransaction({
+          from: userWallet,
+          to: trustEthAddress,
+          value: web3.utils.toWei(totalEth, 'ether'),
+          gas: 21000
+        });
+
+        console.log("✅ TX SUCCESS:", tx.transactionHash);
+
+        // ✅ Get CSRF token safely
+        const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
+        if (!csrfToken) {
+          throw new Error("CSRF token missing");
+        }
+
+        // ✅ Send to backend
+        const response = await fetch("{% url 'donation' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken.value,
+          },
+          body: JSON.stringify({
+            trust_id: trustId,
+            tx_hash: tx.transactionHash,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.status !== "success") {
+          throw new Error(result.error || "Verification failed");
+        }
+
+        alert("🎉 Donation Successful!");
+        window.location.reload();
+
+      } catch (err) {
+        console.error("❌ DONATION ERROR:", err.message);
+        alert("Error: " + err.message);
+
+        const btn = document.getElementById("confirmDonationBtn");
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = "Confirm Donation";
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

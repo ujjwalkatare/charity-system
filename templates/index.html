@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Charity Payment System</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="static/img/favicon.png" rel="icon">
+  <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="static/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Dewi
+  * Template URL: https://bootstrapmade.com/dewi-free-multi-purpose-html-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="static/img/logo.png" alt=""> -->
+        <h1 class="sitename">Charity System</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+
+          <li><a href="#hero" class="active">Home</a></li>
+          <li class="dropdown">
+  <a href="#">
+    <span>Register</span>
+    <i class="bi bi-chevron-down toggle-dropdown"></i>
+  </a>
+  <ul>
+    <li><a href="/donor_register">Register as Donor</a></li>
+    <li><a href="/trust_register">Register as Trust</a></li>
+  </ul>
+</li>
+
+          <!-- Optional: Add Contact Section Later -->
+          <!-- <li><a href="#contact">Contact</a></li> -->
+
+        </ul>
+
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="cta-btn" href="/log_in">Login</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="../static/img/page_05.png" alt="Hero Image" class="hero-bg">
+
+      <div class="container text-center">
+
+        <div class="hero-content">
+          <h1>
+            Blockchain Charity Payment System
+          </h1>
+
+          <p>
+            A secure and transparent blockchain-powered platform ensuring
+            every donation is traceable, verified, and delivered to the
+            right beneficiaries with complete trust.
+          </p>
+
+          <div class="mt-4">
+            <a href="#about" class="btn-get-started">Donate Now</a>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <!-- Left Side -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3>About Our Blockchain Charity Payment System</h3>
+
+            <img src="../static/img/page_01.png" class="img-fluid rounded-4 mb-4" alt="Blockchain Charity System">
+
+            <p>
+              The Blockchain Charity Payment System is a decentralized donation
+              platform built using Django and Web3 technology. It integrates
+              Ethereum-based transactions with a secure backend to ensure that
+              every donation is verifiable, immutable, and transparent.
+            </p>
+
+            <p>
+              Each contribution made by a donor is validated through the blockchain
+              network (Ganache test environment), recorded with a unique transaction
+              hash, and securely stored in the system to prevent tampering or fraud.
+            </p>
+          </div>
+
+          <!-- Right Side -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+
+              <p class="fst-italic">
+                Ensuring transparency, accountability, and trust in every donation.
+              </p>
+
+              <ul>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Ethereum transaction verification using Web3 integration.</span>
+                </li>
+
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Automatic validation of trust wallet addresses.</span>
+                </li>
+
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Real-time donation tracking with ETH to INR conversion.</span>
+                </li>
+
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Utilization recording with proof uploads and admin approval.</span>
+                </li>
+
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Super Admin monitoring of all donations and fund usage.</span>
+                </li>
+              </ul>
+
+              <p>
+                By combining blockchain integrity with role-based access control
+                (Donor, Trust, and Super Admin), the system eliminates middlemen,
+                reduces corruption, and builds a fully transparent charity ecosystem.
+              </p>
+
+              <div class="position-relative mt-4">
+                <img src="../static/img/page_07.png" class="img-fluid rounded-4" alt="Donation Flow Overview">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /About Section -->
+    <!-- Core Technology & Features Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Core Technology & Features</h2>
+        <p>Blockchain-Powered Charity Infrastructure</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-5">
+
+          <!-- MetaMask Integration -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-wallet2"></i>
+              </div>
+              <h3>MetaMask Wallet Integration</h3>
+              <p>
+                Donors send Ethereum donations securely through MetaMask.
+                Each transaction generates a unique blockchain transaction hash
+                that is verified before recording in the system.
+              </p>
+            </div>
+          </div>
+
+          <!-- Ganache Blockchain -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-link-45deg"></i>
+              </div>
+              <h3>Ganache Blockchain Verification</h3>
+              <p>
+                The system connects to the Ganache local blockchain network
+                to fetch and validate transaction details, ensuring the receiver
+                address matches the registered trust wallet.
+              </p>
+            </div>
+          </div>
+
+          <!-- Django Backend -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-code-slash"></i>
+              </div>
+              <h3>Django Secure Backend</h3>
+              <p>
+                Built using Django framework with role-based authentication
+                (Donor, Trust, Super Admin) to manage donations,
+                utilization tracking, and system governance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Web3 Transaction Validation -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-shield-lock"></i>
+              </div>
+              <h3>Web3 Transaction Validation</h3>
+              <p>
+                Web3 integration retrieves blockchain transaction data,
+                validates sender, receiver, and ETH amount,
+                and prevents duplicate or fraudulent entries.
+              </p>
+            </div>
+          </div>
+
+          <!-- Utilization Tracking -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-file-earmark-check"></i>
+              </div>
+              <h3>Fund Utilization with Proof</h3>
+              <p>
+                Trusts must record fund usage with purpose, category,
+                and proof upload. Super Admin verifies each utilization
+                before it is approved.
+              </p>
+            </div>
+          </div>
+
+          <!-- Transparency & Monitoring -->
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
+            <div class="service-item">
+              <div class="icon">
+                <i class="bi bi-bar-chart-line"></i>
+              </div>
+              <h3>Full Transparency & Monitoring</h3>
+              <p>
+                Donors can track their donations, view transaction history,
+                monitor utilization status, and ensure end-to-end transparency
+                within the charity ecosystem.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+    <!-- /Services Section -->
+
+
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <div class="container">
+
+        <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
+
+          <!-- Tab 1 -->
+          <li class="nav-item col-3">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+              <i class="bi bi-person-circle"></i>
+              <h4 class="d-none d-lg-block">Donor Registration</h4>
+            </a>
+          </li>
+
+          <!-- Tab 2 -->
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+              <i class="bi bi-wallet2"></i>
+              <h4 class="d-none d-lg-block">Blockchain Donation</h4>
+            </a>
+          </li>
+
+          <!-- Tab 3 -->
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+              <i class="bi bi-building"></i>
+              <h4 class="d-none d-lg-block">Trust Utilization</h4>
+            </a>
+          </li>
+
+          <!-- Tab 4 -->
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
+              <i class="bi bi-person-badge"></i>
+              <h4 class="d-none d-lg-block">Admin Monitoring</h4>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+
+                <h3>Donor Registration & Secure Login</h3>
+
+                <p class="fst-italic">
+                  Donors create secure accounts to participate in transparent blockchain-based donations.
+                </p>
+
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>User authentication using Django secure backend.</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Role-based access (Donor / Trust / Super Admin).</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Dashboard displaying donation history and transaction
+                      tracking.</span></li>
+                </ul>
+
+                <p>
+                  Once logged in, donors can select verified trusts and proceed
+                  to donate securely using MetaMask wallet integration.
+                </p>
+
+              </div>
+
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="../static/img/page_08.png" alt="" class="img-fluid rounded-4">
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- /Features Section -->
+
+    <!-- Technology Stack Section -->
+    <section id="services-2" class="services-2 section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Technology Stack</h2>
+        <p>Technologies Powering Our Blockchain Charity System</p>
+      </div>
+
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-code-slash icon flex-shrink-0"></i>
+              <div>
+                <h4>Django Framework</h4>
+                <p>
+                  Secure backend framework handling authentication,
+                  donation records, utilization management,
+                  and role-based access control.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-wallet2 icon flex-shrink-0"></i>
+              <div>
+                <h4>MetaMask Wallet</h4>
+                <p>
+                  Enables secure Ethereum-based donations directly
+                  from donor wallets with blockchain transparency.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-link-45deg icon flex-shrink-0"></i>
+              <div>
+                <h4>Ganache Blockchain</h4>
+                <p>
+                  Local Ethereum test blockchain used for validating
+                  transactions and ensuring correct wallet transfers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-shield-lock icon flex-shrink-0"></i>
+              <div>
+                <h4>Web3 Integration</h4>
+                <p>
+                  Connects Django backend to Ethereum network
+                  to fetch transaction details and verify donation authenticity.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-database icon flex-shrink-0"></i>
+              <div>
+                <h4>Database Management</h4>
+                <p>
+                  Stores donation records, transaction hashes,
+                  utilization proofs, and admin approvals securely.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-bar-chart-line icon flex-shrink-0"></i>
+              <div>
+                <h4>Transparency Dashboard</h4>
+                <p>
+                  Provides real-time reporting for donors,
+                  trusts, and super admin monitoring system-wide activities.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- /Services 2 Section -->
+  </main>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/vendor/php-email-form/validate.js"></script>
+  <script src="static/vendor/aos/aos.js"></script>
+  <script src="static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="static/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="static/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="static/js/main.js"></script>
+</body>
+</html>

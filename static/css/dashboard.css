@@ -1,0 +1,577 @@
+/* === ROOT THEME — DARK NAVY & ORANGE === */
+:root {
+  --primary-dark: #000821; /* deep navy background for header */
+  --sidebar-dark: #001233; /* rich navy sidebar */
+  --accent: #ff4a17; /* vibrant orange */
+  --light-bg: #f4f6fb; /* soft off-white background */
+  --card-bg: #ffffff;
+  --text-muted: #6c757d;
+  --glass-white: rgba(255, 255, 255, 0.12);
+  --shadow-sm: 0 8px 20px rgba(0, 8, 33, 0.06);
+  --shadow-hover: 0 16px 30px rgba(0, 18, 51, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+body {
+  background: var(--light-bg);
+}
+
+/* === GLASS EFFECT HEADER (dark navy + glass sheen) === */
+.dashboard-header {
+  height: 70px;
+  background: var(--primary-dark);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1100;
+  backdrop-filter: blur(2px); /* subtle glass */
+  border-bottom: 1px solid rgba(255, 74, 23, 0.25);
+  box-shadow: 0 6px 18px rgba(0, 8, 33, 0.3);
+}
+
+/* optional orange underline glow */
+.dashboard-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent 80%);
+}
+
+/* === LAYOUT (push below fixed header) === */
+.dashboard-container {
+  display: flex;
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+}
+
+/* === PROFESSIONAL SIDEBAR (dark navy, elegant) === */
+.sidebar {
+  width: 280px;
+  background: var(--sidebar-dark);
+  padding: 2rem 1.2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 20px rgba(0, 18, 51, 0.2);
+  border-top-right-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.sidebar h4 {
+  margin-bottom: 2.2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding-left: 0.5rem;
+  color: #ffffffcc;
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 6px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #cbd5e1;
+  padding: 0.85rem 1rem 0.85rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+/* icon spacing (using font-awesome) */
+.sidebar ul li a i {
+  width: 24px;
+  font-size: 1.2rem;
+  color: var(--accent);
+  transition: color 0.2s;
+}
+
+.sidebar ul li a:hover {
+  background: rgba(255, 74, 23, 0.1);
+  color: #ffffff;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
+  border-radius: 8px;
+}
+
+.sidebar ul li a.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(255, 74, 23, 0.3);
+}
+
+.sidebar ul li a.active i {
+  color: white;
+}
+
+/* === MAIN CONTENT === */
+.main-content {
+  flex: 1;
+  padding: 2.2rem 2.5rem;
+  transition: all 0.2s;
+}
+
+.welcome-title {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+  color: #0b1a33;
+  letter-spacing: -0.02em;
+  border-left: 6px solid var(--accent);
+  padding-left: 1.2rem;
+  line-height: 1.3;
+}
+
+/* === ELEVATED STAT CARDS (soft shadows, hover lift, orange top accent) === */
+.card-box {
+  background: var(--card-bg);
+  padding: 1.8rem 1.8rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  height: 100%;
+}
+
+.card-box:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--accent);
+}
+
+.card-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 2.5rem;
+  margin-top: 0.3rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+
+/* === TRUST CARDS (clean, glassy white, subtle orange accent) === */
+.trust-card {
+  background: var(--card-bg);
+  padding: 1.5rem 1.2rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 18, 51, 0.05);
+  transition: all 0.25s;
+  border: 1px solid rgba(255, 74, 23, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trust-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 30px rgba(0, 18, 51, 0.1);
+  border-color: rgba(255, 74, 23, 0.25);
+}
+
+.trust-card h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #001233;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trust-card h5 i {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.trust-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+/* small location icon mute */
+.trust-card .location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #4b5b73;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.trust-card .location i {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* === BOOTSTRAP OVERRIDES / ENHANCEMENTS === */
+.row.g-4,
+.row.g-3 {
+  margin-top: 0;
+}
+
+/* === MOBILE RESPONSIVENESS (with bootstrap col, plus custom) === */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 240px;
+    padding: 2rem 1rem;
+  }
+  .main-content {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* hidden on tablet/mobile — you could add a offcanvas toggle if needed, but keep clean */
+  }
+  .main-content {
+    padding: 1.5rem 1.2rem;
+  }
+  .dashboard-header {
+    padding: 0 1.2rem;
+    font-size: 1.3rem;
+  }
+  .welcome-title {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+  }
+  .card-value {
+    font-size: 2rem;
+  }
+}
+
+/* optional small screen fix for trust cards */
+@media (max-width: 576px) {
+  .main-content {
+    padding: 1rem;
+  }
+  .card-box {
+    padding: 1.4rem;
+  }
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* smooth transitions */
+.card-box,
+.trust-card,
+.sidebar ul li a {
+  will-change: transform, box-shadow;
+}
+
+/* small polish for icons in header */
+.dashboard-header i {
+  color: var(--accent);
+  margin-right: 12px;
+  font-size: 1.8rem;
+}
+
+/* fake extra data to match placeholders – keep design robust */
+.text-small {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===============================
+   WELCOME BOX
+================================ */
+/* Dashboard background only */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  min-height: calc(100vh - 70px);
+  transition: 0.3s ease;
+}
+
+/* Dashboard background active */
+.main-content.dashboard-bg {
+  background:
+    linear-gradient(rgba(0, 8, 33, 0.75), rgba(0, 8, 33, 0.75)),
+    url("/static/img/page_02.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0px;
+}
+
+/* Hide all sections by default */
+.content-section {
+  display: none;
+}
+
+/* Show active section */
+.active-section {
+  display: block;
+}
+
+/* ===============================
+   PROFILE SECTION PREMIUM STYLE
+================================ */
+
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.profile-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 40px 30px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Orange Accent Top Strip */
+.profile-accent {
+  height: 5px;
+  width: 100%;
+  background: #ff4a17;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 18px 18px 0 0;
+}
+
+/* Profile Image */
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #ff4a17;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* Name */
+.profile-name {
+  font-weight: 600;
+  color: #000821;
+  margin-bottom: 5px;
+}
+
+/* Username */
+.profile-username {
+  color: #6c757d;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* Info Rows */
+.profile-info {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 14px;
+}
+
+.info-row span {
+  color: #6c757d;
+}
+
+.info-row strong {
+  color: #000821;
+  font-weight: 600;
+}
+
+/* ===============================
+   NGO SECTION PREMIUM STYLE
+================================ */
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #000821;
+}
+
+.section-subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* NGO Grid */
+.ngo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 25px;
+}
+
+/* NGO Card */
+.ngo-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px 25px 20px 25px;
+  box-shadow: 0 20px 40px #0000000f;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.ngo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Orange Accent Strip */
+.ngo-accent {
+  height: 5px;
+  width: 100%;
+  background: #ff4a17;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 18px 18px 0 0;
+}
+
+/* NGO Name */
+.ngo-name {
+  font-weight: 600;
+  color: #000821;
+  margin-bottom: 20px;
+}
+
+/* Info Rows */
+.ngo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+}
+
+.ngo-row span {
+  color: #6c757d;
+}
+
+.ngo-row strong {
+  color: #000821;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ETH Address Style */
+.eth-address {
+  font-size: 14px;
+  font-family: monospace; /* Looks professional for hash */
+  white-space: nowrap; /* Prevent line break */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ... if long */
+  max-width: 160px; /* Control width */
+  display: inline-block;
+  color: #ff4a17;
+}
+
+/* Donate Button */
+.donate-btn {
+  margin-top: 15px;
+  padding: 8px 18px;
+  background: #ff4a17;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.donate-btn:hover {
+  background: #e13e0f;
+}
+
+/* Empty State */
+.no-ngo {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  color: #6c757d;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.ngo-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--accent);
+}

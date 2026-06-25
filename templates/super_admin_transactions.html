@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Super Admin Transactions</title>
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- ================= HEADER ================= -->
+
+    <div class="dashboard-header">
+        <i></i>
+        Super Admin Dashboard
+    </div>
+
+    <div class="dashboard-container">
+        <!-- ================= SIDEBAR ================= -->
+
+        <div class="sidebar">
+            <h4>Super Admin</h4>
+
+            <ul>
+                <li>
+                    <a href="{% url 'super_admin_dashboard' %}"> <i></i> Dashboard </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'super_admin_dashboard' %}"> <i></i> Donor List </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'super_admin_dashboard' %}"> <i></i> Trust List </a>
+                </li>
+
+                <li>
+                    <a class="active"> <i></i> Transactions </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'log_in' %}"> <i></i> Logout </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <div class="main-content">
+            <h2 class="welcome-title">Donation & Utilization Trace</h2>
+
+            <!-- ================= STAT CARDS ================= -->
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="card-title">Total Donations</div>
+                        <div class="card-value">{{ total_donations }}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="card-title">Total Utilizations</div>
+                        <div class="card-value">{{ total_utilizations }}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="card-title">Approved</div>
+                        <div class="card-value">{{ approved_utilizations }}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-box">
+                        <div class="card-title">Pending</div>
+                        <div class="card-value">{{ pending_utilizations }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ngo-card pt-4 px-3 pb-3">
+                <!-- HEADER -->
+                <div class="row fw-bold text-muted pb-2 border-bottom">
+                    <div class="col-md-2">Name</div>
+                    <div class="col-md-2">Donation (INR)</div>
+                    <div class="col-md-2">Date</div>
+                    <div class="col-md-1">Used</div>
+                    <div class="col-md-1 text-center">View</div>
+                    <div class="col-md-2">Description</div>
+                    <div class="col-md-1">Status</div>
+                    <div class="col-md-1 text-center">Action</div>
+                </div>
+
+                {% for data in donations_data %}
+
+                {% if data.utilizations %}
+
+                {% for u in data.utilizations %}
+
+                <div class="row align-items-center py-3 border-bottom">
+
+                    <div class="col-md-2 fw-semibold">
+                        {{ data.donor_name }}
+                    </div>
+
+                    <div class="col-md-2">
+                        ₹ {{ data.inr_amount }}
+                    </div>
+
+                    <div class="col-md-2">
+                        {{ data.date|date:"d M Y" }}
+                    </div>
+
+                    <div class="col-md-1">
+                        ₹ {{ u.amount_used|default:"0" }}
+                    </div>
+
+                    <div class="col-md-1 text-center">
+                        {% if u.proof %}
+<a href="{{ u.proof.url }}" target="_blank">
+    <i class="fa fa-eye text-primary" style="cursor:pointer;"></i>
+</a>
+{% else %}
+-
+{% endif %}
+                    </div>
+
+                    <div class="col-md-2">
+                        {{ u.purpose|default:"-" }}
+                    </div>
+
+                    <div class="col-md-1">
+                        {% if u.is_verified %}
+                        <span class="badge bg-success">Approved</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-1 text-center">
+
+                        {% if not u.is_verified %}
+
+                        <a href="{% url 'approve_utilization' u.id %}" class="btn btn-success btn-sm mb-1">
+                            Approve
+                        </a>
+
+                        <a href="{% url 'reject_utilization' u.id %}" class="btn btn-danger btn-sm">
+                            Reject
+                        </a>
+
+                        {% else %}
+                        -
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <!-- Donation without utilization -->
+
+                <div class="row align-items-center py-3 border-bottom">
+
+                    <div class="col-md-2 fw-semibold">
+                        {{ data.donor_name }}
+                    </div>
+
+                    <div class="col-md-2">
+                        ₹ {{ data.inr_amount }}
+                    </div>
+
+                    <div class="col-md-2">
+                        {{ data.date|date:"d M Y" }}
+                    </div>
+
+                    <div class="col-md-1">
+                        ₹ 0
+                    </div>
+
+                    <div class="col-md-1 text-center">
+                        -
+                    </div>
+
+                    <div class="col-md-2">
+                        No utilization
+                    </div>
+
+                    <div class="col-md-1">
+                        -
+                    </div>
+
+                    <div class="col-md-1 text-center">
+                        -
+                    </div>
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JS ================= -->
+
+    <script src="/static/js/dashboard.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Donor Registration</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="/static/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
+    <link href="/static/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header id="header" class="header fixed-top custom-header">
+      <div
+        class="container-fluid container-xl d-flex align-items-center justify-content-between"
+      >
+        <a href="/" class="logo d-flex align-items-center">
+          <h1>Charity System</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/log_in" class="cta-btn">Login</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </header>
+
+    <!-- AUTH SECTION -->
+    <section class="auth-section">
+      <div class="card auth-card">
+        <div class="row g-0">
+          <div class="col-md-6 auth-left">
+            <img
+              src="/static/img/registration_page.png"
+              alt="Registration Image"
+            />
+          </div>
+
+          <div class="col-md-6 auth-right">
+            <h3 class="mb-4 text-center">Donor Registration</h3>
+
+            <form action="/donor_register" method="POST">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="fname"
+                  class="form-control"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="lname"
+                  class="form-control"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  name="username"
+                  id="username"
+                  value="{{ username }}"
+                  placeholder="Email"
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="password"
+                  name="password1"
+                  class="form-control"
+                  placeholder="Confirm Password"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">
+                Register
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/aos/aos.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% for message in messages %} {% if message.tags == 'success' %}
+    <script>
+      swal("{{ message }}", "", "success");
+    </script>
+
+    {% elif message.tags == 'error' %}
+    <script>
+      swal("{{ message }}", "", "error");
+    </script>
+
+    {% elif message.tags == 'warning' %}
+    <script>
+      swal("{{ message }}", "", "warning");
+    </script>
+
+    {% elif message.tags == 'info' %}
+    <script>
+      swal("{{ message }}", "", "info");
+    </script>
+
+    {% endif %} {% endfor %}
+  </body>
+</html>
